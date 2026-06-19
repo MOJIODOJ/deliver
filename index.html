@@ -1,0 +1,524 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Грузоперевозки в Таллине и по Эстонии — от 20€/час | Kolimisteenus</title>
+  <meta name="description" content="Грузоперевозки и переезды в Таллине и по всей Эстонии. Опытные грузчики, подача от 30 минут, от 20€/час. Без скрытых платежей и без «минимум 3 часа».">
+  <meta property="og:title" content="Грузоперевозки в Таллине — аккуратно, быстро, без накруток">
+  <meta property="og:description" content="Квартирные и офисные переезды, перевозка мебели, пианино, техники. От 20€/час, подача от 30 минут.">
+  <meta property="og:type" content="website">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Playfair+Display:wght@600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../../assets/shared.css">
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🚚</text></svg>">
+  <style>
+    :root {
+      --bg: #0d1420;
+      --surface: #141d2e;
+      --surface-2: #1d2840;
+      --accent: #ff8a3d;
+      --accent-hover: #ffa463;
+      --blue: #3d7bff;
+      --font-display: "Inter", system-ui, sans-serif;
+    }
+    .logo { font-family: var(--font-display); font-weight: 800; letter-spacing: -0.01em; }
+    .hero {
+      background:
+        radial-gradient(circle at 85% 10%, rgba(255,138,61,0.18), transparent 45%),
+        radial-gradient(circle at 10% 90%, rgba(61,123,255,0.14), transparent 40%);
+      padding-top: 3.5rem;
+    }
+    .hero h1 { font-family: var(--font-display); font-weight: 800; }
+    .tagline {
+      gap: 0.5rem; flex-wrap: wrap; margin: 0 0 1.25rem;
+      font-weight: 700; letter-spacing: 0.04em; color: var(--accent); text-transform: uppercase; font-size: 0.85rem;
+    }
+    .tagline[data-lang] { display: none; }
+    .tagline[data-lang].visible { display: inline-flex; }
+    .hero-price {
+      display: inline-flex; align-items: baseline; gap: 0.4rem;
+      background: var(--surface-2); border: 1px solid rgba(255,138,61,0.3);
+      padding: 0.6rem 1.1rem; border-radius: 999px; margin-bottom: 1.5rem;
+    }
+    .hero-price b { font-size: 1.4rem; color: var(--accent); }
+    .hero-price span { color: var(--muted); font-size: 0.9rem; }
+
+    .stats {
+      display: grid; grid-template-columns: repeat(4, 1fr); gap: 1rem;
+      margin-top: 2.5rem;
+    }
+    .stat {
+      background: var(--surface); border: 1px solid rgba(255,255,255,0.06);
+      border-radius: var(--radius); padding: 1.25rem; text-align: center;
+    }
+    .stat b { display: block; font-size: 1.6rem; color: var(--accent); font-weight: 800; }
+    .stat b[data-lang] { display: none; }
+    .stat b[data-lang].visible { display: block; }
+    .stat span { color: var(--muted); font-size: 0.85rem; }
+    .hero-price b[data-lang] { display: none; }
+    .hero-price b[data-lang].visible { display: inline; }
+
+    .services-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 1rem; }
+    .service { display: flex; gap: 0.9rem; align-items: flex-start; background: var(--surface); border: 1px solid rgba(255,255,255,0.06); border-radius: var(--radius); padding: 1.15rem 1.25rem; }
+    .service .ico { font-size: 1.5rem; line-height: 1; flex-shrink: 0; }
+    .service h3 { margin: 0 0 0.25rem; font-size: 1rem; }
+    .service p { margin: 0; color: var(--muted); font-size: 0.9rem; }
+
+    .promise { background: linear-gradient(135deg, rgba(255,138,61,0.1), rgba(61,123,255,0.06)); border: 1px solid rgba(255,138,61,0.2); border-radius: var(--radius); padding: 2rem; }
+    .promise ul { list-style: none; margin: 1rem 0 0; padding: 0; display: grid; gap: 0.6rem; }
+    .promise li { display: flex; gap: 0.6rem; align-items: center; font-size: 1rem; }
+    .promise li::before { content: "✓"; color: #4ade80; font-weight: 800; }
+
+    .why-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 1rem; }
+    .why { background: var(--surface); border: 1px solid rgba(255,255,255,0.06); border-radius: var(--radius); padding: 1.25rem; }
+    .why .ico { font-size: 1.4rem; }
+    .why h3 { margin: 0.5rem 0 0.25rem; font-size: 1rem; }
+    .why p { margin: 0; color: var(--muted); font-size: 0.88rem; }
+
+    .pill-list { display: flex; flex-wrap: wrap; gap: 0.5rem; margin-top: 0.75rem; }
+    .pill { background: var(--surface-2); border: 1px solid rgba(255,255,255,0.08); border-radius: 999px; padding: 0.35rem 0.85rem; font-size: 0.85rem; color: var(--muted); }
+
+    .cta-banner { background: var(--accent); color: #1a1208; border-radius: var(--radius); padding: 2.5rem 2rem; text-align: center; }
+    .cta-banner h2 { font-family: var(--font-display); font-weight: 800; margin: 0 0 0.5rem; color: #1a1208; }
+    .cta-banner p { margin: 0 0 1.5rem; color: #3a2a14; }
+    .cta-banner .btn-secondary { background: #1a1208; color: #fff; border: 0; }
+
+    .float-call {
+      position: fixed; right: 1.1rem; bottom: 1.1rem; z-index: 200;
+      display: flex; gap: 0.6rem;
+    }
+    .float-call a {
+      width: 54px; height: 54px; border-radius: 50%; display: grid; place-items: center;
+      font-size: 1.5rem; box-shadow: var(--shadow);
+    }
+    .fc-phone { background: var(--accent); }
+    .fc-wa { background: #25d366; }
+
+    @media (max-width: 720px) {
+      .stats { grid-template-columns: repeat(2, 1fr); }
+    }
+  </style>
+</head>
+<body>
+  <header class="site-header">
+    <div class="container inner">
+      <a class="logo" href="#top">🚚 Kolimine<span style="color:var(--accent)">.ee</span></a>
+      <nav class="nav">
+        <a href="#services" data-lang="ru">Услуги</a>
+        <a href="#services" data-lang="et">Teenused</a>
+        <a href="#prices" data-lang="ru">Цены</a>
+        <a href="#prices" data-lang="et">Hinnad</a>
+        <a href="#why" data-lang="ru">Почему мы</a>
+        <a href="#why" data-lang="et">Miks meie</a>
+        <a href="#contact" data-lang="ru">Контакты</a>
+        <a href="#contact" data-lang="et">Kontakt</a>
+      </nav>
+      <div class="lang-toggle">
+        <button type="button" data-set-lang="ru">RU</button>
+        <button type="button" data-set-lang="et">ET</button>
+      </div>
+    </div>
+  </header>
+
+  <main id="top">
+    <!-- HERO -->
+    <section class="hero">
+      <div class="container hero-grid">
+        <div>
+          <span class="tagline" data-lang="ru">Аккуратно · Быстро · Без накруток</span>
+          <span class="tagline" data-lang="et">Korralikult · Kiiresti · Ilma lisatasudeta</span>
+          <h1 data-lang="ru">Грузоперевозки в Таллине и по всей Эстонии</h1>
+          <h1 data-lang="et">Kolimis- ja veoteenus Tallinnas ja üle Eesti</h1>
+          <p data-lang="ru">Квартирные и офисные переезды, перевозка мебели, техники, пианино и хрупких вещей. Опытная команда грузчиков, подача машины — от 30 минут.</p>
+          <p data-lang="et">Korteri- ja kontorikolimised, mööbli, tehnika, klaveri ja õrnade esemete vedu. Kogenud meeskond, auto kohale — alates 30 minutist.</p>
+          <div class="hero-price">
+            <b data-lang="ru">от 20€</b>
+            <b data-lang="et">alates 20€</b>
+            <span data-lang="ru">в час · без «минимум 3 часа»</span>
+            <span data-lang="et">tunnis · ilma «min. 3 tundi»</span>
+          </div>
+          <div class="btn-row">
+            <a class="btn btn-primary" href="tel:+37255500000" data-lang="ru">📞 Позвонить</a>
+            <a class="btn btn-primary" href="tel:+37255500000" data-lang="et">📞 Helista</a>
+            <a class="btn btn-whatsapp" href="https://wa.me/37255500000" target="_blank" rel="noopener">WhatsApp</a>
+          </div>
+          <div class="stats">
+            <div class="stat"><b>10+</b><span data-lang="ru">лет опыта</span><span data-lang="et">aastat kogemust</span></div>
+            <div class="stat"><b data-lang="ru">30 мин</b><b data-lang="et">30 min</b><span data-lang="ru">подача машины</span><span data-lang="et">auto kohale</span></div>
+            <div class="stat"><b>7/7</b><span data-lang="ru">дней в неделю</span><span data-lang="et">päeva nädalas</span></div>
+            <div class="stat"><b data-lang="ru">6 м</b><b data-lang="et">6 m</b><span data-lang="ru">длинномерный груз</span><span data-lang="et">pikk veos</span></div>
+          </div>
+        </div>
+        <img class="hero-image" src="https://images.unsplash.com/photo-1600518464441-9154a4dea21b?auto=format&fit=crop&w=900&q=80" alt="Грузоперевозки и переезд">
+      </div>
+    </section>
+
+    <!-- SERVICES -->
+    <section id="services">
+      <div class="container">
+        <h2 class="section-title" data-lang="ru">Что мы делаем</h2>
+        <h2 class="section-title" data-lang="et">Mida me teeme</h2>
+        <p class="section-subtitle" data-lang="ru">Берём на себя весь процесс переезда — вам не нужно искать разных специалистов</p>
+        <p class="section-subtitle" data-lang="et">Võtame kogu kolimisprotsessi enda peale — pole vaja otsida erinevaid spetsialiste</p>
+        <div class="services-grid">
+          <div class="service">
+            <span class="ico">🏠</span>
+            <div>
+              <h3 data-lang="ru">Квартирные и офисные переезды</h3>
+              <h3 data-lang="et">Korteri- ja kontorikolimised</h3>
+              <p data-lang="ru">Под ключ: от упаковки до расстановки на новом месте</p>
+              <p data-lang="et">Võtmed kätte: pakkimisest kuni paigutamiseni</p>
+            </div>
+          </div>
+          <div class="service">
+            <span class="ico">🛋️</span>
+            <div>
+              <h3 data-lang="ru">Перевозка мебели и техники</h3>
+              <h3 data-lang="et">Mööbli ja tehnika vedu</h3>
+              <p data-lang="ru">Бережно, с фиксацией и защитой углов</p>
+              <p data-lang="et">Hoolikalt, kinnituse ja nurgakaitsega</p>
+            </div>
+          </div>
+          <div class="service">
+            <span class="ico">🗑️</span>
+            <div>
+              <h3 data-lang="ru">Вывоз мусора и старой мебели</h3>
+              <h3 data-lang="et">Prügi ja vana mööbli äravedu</h3>
+              <p data-lang="ru">Освободим помещение быстро и чисто</p>
+              <p data-lang="et">Vabastame ruumi kiiresti ja puhtalt</p>
+            </div>
+          </div>
+          <div class="service">
+            <span class="ico">🧱</span>
+            <div>
+              <h3 data-lang="ru">Доставка стройматериалов</h3>
+              <h3 data-lang="et">Ehitusmaterjalide vedu</h3>
+              <p data-lang="ru">Материалы и конструкции на объект</p>
+              <p data-lang="et">Materjalid ja konstruktsioonid objektile</p>
+            </div>
+          </div>
+          <div class="service">
+            <span class="ico">🎹</span>
+            <div>
+              <h3 data-lang="ru">Пианино, сейфы, тяжёлые предметы</h3>
+              <h3 data-lang="et">Klaverid, seifid, rasked esemed</h3>
+              <p data-lang="ru">Спецоборудование для тяжёлого груза</p>
+              <p data-lang="et">Eriseadmed raskete veoste jaoks</p>
+            </div>
+          </div>
+          <div class="service">
+            <span class="ico">🚜</span>
+            <div>
+              <h3 data-lang="ru">Перевозка техники и транспорта</h3>
+              <h3 data-lang="et">Tehnika ja transpordi vedu</h3>
+              <p data-lang="ru">Квадроциклы, мотоциклы, скутеры, велосипеды</p>
+              <p data-lang="et">ATV-d, mootorrattad, skuutrid, jalgrattad</p>
+            </div>
+          </div>
+          <div class="service">
+            <span class="ico">🐾</span>
+            <div>
+              <h3 data-lang="ru">Животные, растения и деревья</h3>
+              <h3 data-lang="et">Loomad, taimed ja puud</h3>
+              <p data-lang="ru">Сомневаетесь — позвоните, найдём решение</p>
+              <p data-lang="et">Kahtlete — helistage, leiame lahenduse</p>
+            </div>
+          </div>
+          <div class="service">
+            <span class="ico">📏</span>
+            <div>
+              <h3 data-lang="ru">Длинномерные грузы до 6 метров</h3>
+              <h3 data-lang="et">Pikad veosed kuni 6 meetrit</h3>
+              <p data-lang="ru">Перевезём негабарит безопасно</p>
+              <p data-lang="et">Veame gabariidivälise ohutult</p>
+            </div>
+          </div>
+        </div>
+
+        <h3 class="section-title" style="font-size:1.4rem;margin-top:3rem" data-lang="ru">Аккуратная перевозка хрупкого</h3>
+        <h3 class="section-title" style="font-size:1.4rem;margin-top:3rem" data-lang="et">Õrnade esemete hoolikas vedu</h3>
+        <div class="pill-list">
+          <span class="pill" data-lang="ru">Аквариумы и террариумы</span>
+          <span class="pill" data-lang="et">Akvaariumid ja terraariumid</span>
+          <span class="pill" data-lang="ru">Хрупкие и ценные вещи</span>
+          <span class="pill" data-lang="et">Õrnad ja väärtuslikud esemed</span>
+          <span class="pill" data-lang="ru">Стекло, зеркала и картины</span>
+          <span class="pill" data-lang="et">Klaas, peeglid ja maalid</span>
+          <span class="pill" data-lang="ru">Антиквариат</span>
+          <span class="pill" data-lang="et">Antiikesemed</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- EXTRA SERVICES -->
+    <section id="extra">
+      <div class="container">
+        <h2 class="section-title" data-lang="ru">Дополнительные услуги</h2>
+        <h2 class="section-title" data-lang="et">Lisateenused</h2>
+        <p class="section-subtitle" data-lang="ru">Всё выполняется аккуратно и по согласованию с клиентом</p>
+        <p class="section-subtitle" data-lang="et">Kõik tehakse hoolikalt ja kliendiga kooskõlastatult</p>
+        <div class="services-grid">
+          <div class="service">
+            <span class="ico">🔧</span>
+            <div>
+              <h3 data-lang="ru">Разборка и сборка мебели</h3>
+              <h3 data-lang="et">Mööbli lahti- ja kokkupanek</h3>
+              <p data-lang="ru">Шкафы, кухни, кровати, стенки, офисная мебель</p>
+              <p data-lang="et">Kapid, köögid, voodid, seinad, kontorimööbel</p>
+            </div>
+          </div>
+          <div class="service">
+            <span class="ico">📦</span>
+            <div>
+              <h3 data-lang="ru">Упаковка мебели и техники</h3>
+              <h3 data-lang="et">Mööbli ja tehnika pakkimine</h3>
+              <p data-lang="ru">Плёнка, стрейч, защита углов, фиксация</p>
+              <p data-lang="et">Kile, strech, nurgakaitse, kinnitus</p>
+            </div>
+          </div>
+          <div class="service">
+            <span class="ico">🛠️</span>
+            <div>
+              <h3 data-lang="ru">Подготовка к перевозке</h3>
+              <h3 data-lang="et">Ettevalmistus veoks</h3>
+              <p data-lang="ru">Демонтаж, укрепление, маркировка деталей</p>
+              <p data-lang="et">Demontaaž, kindlustamine, detailide märgistus</p>
+            </div>
+          </div>
+          <div class="service">
+            <span class="ico">🚛</span>
+            <div>
+              <h3 data-lang="ru">Фиксация груза в кузове</h3>
+              <h3 data-lang="et">Veose kinnitamine kastis</h3>
+              <p data-lang="ru">Надёжно — для безопасной транспортировки</p>
+              <p data-lang="et">Kindlalt — ohutuks transpordiks</p>
+            </div>
+          </div>
+          <div class="service">
+            <span class="ico">📐</span>
+            <div>
+              <h3 data-lang="ru">Помощь в расстановке</h3>
+              <h3 data-lang="et">Abi paigutamisel</h3>
+              <p data-lang="ru">Расставим мебель на новом месте</p>
+              <p data-lang="et">Paigutame mööbli uues kohas</p>
+            </div>
+          </div>
+          <div class="service">
+            <span class="ico">💪</span>
+            <div>
+              <h3 data-lang="ru">Профессиональные грузчики</h3>
+              <h3 data-lang="et">Professionaalsed kandjad</h3>
+              <p data-lang="ru">Вежливые, пунктуальные, физически крепкие</p>
+              <p data-lang="et">Viisakad, täpsed, füüsiliselt tugevad</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- PRICES / HONESTY -->
+    <section id="prices">
+      <div class="container">
+        <div class="promise">
+          <h2 class="section-title" style="margin-bottom:0.25rem" data-lang="ru">Цены от 20€ в час</h2>
+          <h2 class="section-title" style="margin-bottom:0.25rem" data-lang="et">Hinnad alates 20€ tunnis</h2>
+          <p style="color:var(--muted);margin:0" data-lang="ru">Итоговая стоимость зависит только от объёма, сложности и особенностей работ. Вы заранее понимаете, за что платите.</p>
+          <p style="color:var(--muted);margin:0" data-lang="et">Lõpphind sõltub ainult mahust, keerukusest ja töö eripärast. Te teate ette, mille eest maksate.</p>
+          <ul>
+            <li><span data-lang="ru">Без скрытых платежей</span><span data-lang="et">Ilma varjatud tasudeta</span></li>
+            <li><span data-lang="ru">Без внезапных доплат после работы</span><span data-lang="et">Ilma ootamatute lisatasudeta</span></li>
+            <li><span data-lang="ru">Без «минимум 3 часа», если не согласовано заранее</span><span data-lang="et">Ilma «min. 3 tundi», kui pole eelnevalt kokku lepitud</span></li>
+          </ul>
+          <div class="btn-row" style="margin-top:1.5rem">
+            <a class="btn btn-primary" href="tel:+37255500000" data-lang="ru">Узнать реальную стоимость</a>
+            <a class="btn btn-primary" href="tel:+37255500000" data-lang="et">Küsi tegelik hind</a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- WHY US -->
+    <section id="why">
+      <div class="container">
+        <h2 class="section-title" data-lang="ru">Почему выбирают нас</h2>
+        <h2 class="section-title" data-lang="et">Miks valitakse meid</h2>
+        <div class="why-grid">
+          <div class="why">
+            <span class="ico">📅</span>
+            <h3 data-lang="ru">Работаем 7 дней в неделю</h3>
+            <h3 data-lang="et">Töötame 7 päeva nädalas</h3>
+            <p data-lang="ru">Включая выходные и праздники</p>
+            <p data-lang="et">Kaasa arvatud nädalavahetused</p>
+          </div>
+          <div class="why">
+            <span class="ico">⚡</span>
+            <h3 data-lang="ru">Оперативная подача транспорта</h3>
+            <h3 data-lang="et">Kiire auto kohaletoimetamine</h3>
+            <p data-lang="ru">Машина у вас — от 30 минут</p>
+            <p data-lang="et">Auto kohal — alates 30 minutist</p>
+          </div>
+          <div class="why">
+            <span class="ico">🧰</span>
+            <h3 data-lang="ru">Современное оборудование</h3>
+            <h3 data-lang="et">Kaasaegne varustus</h3>
+            <p data-lang="ru">Ремни, тележки, защита для груза</p>
+            <p data-lang="et">Rihmad, kärud, veose kaitse</p>
+          </div>
+          <div class="why">
+            <span class="ico">🛡️</span>
+            <h3 data-lang="ru">Гарантия аккуратной перевозки</h3>
+            <h3 data-lang="et">Hoolika veo garantii</h3>
+            <p data-lang="ru">Бережём ваше имущество</p>
+            <p data-lang="et">Hoiame teie vara</p>
+          </div>
+          <div class="why">
+            <span class="ico">🤝</span>
+            <h3 data-lang="ru">Индивидуальный подход</h3>
+            <h3 data-lang="et">Individuaalne lähenemine</h3>
+            <p data-lang="ru">К каждому заказу отдельно</p>
+            <p data-lang="et">Igale tellimusele eraldi</p>
+          </div>
+          <div class="why">
+            <span class="ico">🌍</span>
+            <h3 data-lang="ru">Таллин и вся Эстония</h3>
+            <h3 data-lang="et">Tallinn ja kogu Eesti</h3>
+            <p data-lang="ru">Работаем по всей стране</p>
+            <p data-lang="et">Töötame üle kogu riigi</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- REVIEWS -->
+    <section id="reviews">
+      <div class="container">
+        <h2 class="section-title" data-lang="ru">Отзывы клиентов</h2>
+        <h2 class="section-title" data-lang="et">Klientide arvustused</h2>
+        <div class="reviews">
+          <blockquote class="review">
+            <p data-lang="ru">«Переехали всей квартирой за полдня. Аккуратно, ничего не повредили, цена точно как договаривались.»</p>
+            <p data-lang="et">«Kolisime terve korteri poole päevaga. Korralikult, midagi ei kahjustatud, hind täpselt kokkulepitud.»</p>
+            <cite>— Sergei, Tallinn</cite>
+          </blockquote>
+          <blockquote class="review">
+            <p data-lang="ru">«Перевозили пианино — боялась за инструмент. Ребята всё сделали профессионально. Рекомендую!»</p>
+            <p data-lang="et">«Vedasime klaverit — kartsin pilli pärast. Mehed tegid kõik professionaalselt. Soovitan!»</p>
+            <cite>— Jelena, Tartu</cite>
+          </blockquote>
+          <blockquote class="review">
+            <p data-lang="ru">«Подали машину через 25 минут после звонка. Вывезли старую мебель, всё чисто. Спасибо!»</p>
+            <p data-lang="et">«Auto tuli 25 minutiga. Vedasid vana mööbli ära, kõik puhas. Aitäh!»</p>
+            <cite>— Andrei, Tallinn</cite>
+          </blockquote>
+        </div>
+      </div>
+    </section>
+
+    <!-- CONTACT -->
+    <section id="contact">
+      <div class="container">
+        <h2 class="section-title" data-lang="ru">Звоните прямо сейчас — всегда на связи</h2>
+        <h2 class="section-title" data-lang="et">Helistage kohe — alati ühenduses</h2>
+        <p class="section-subtitle" data-lang="ru">Оперативная консультация и запись по телефону. Озвучим реальную стоимость и объясним, из чего она складывается.</p>
+        <p class="section-subtitle" data-lang="et">Kiire konsultatsioon ja broneerimine telefoni teel. Ütleme tegeliku hinna ja selgitame, millest see koosneb.</p>
+        <div class="contact-grid">
+          <div class="contact-list">
+            <div class="contact-item">
+              <strong data-lang="ru">Телефон</strong>
+              <strong data-lang="et">Telefon</strong>
+              <span><a href="tel:+37255500000">+372 5550 0000</a></span>
+            </div>
+            <div class="contact-item">
+              <strong>WhatsApp</strong>
+              <span><a href="https://wa.me/37255500000" target="_blank" rel="noopener">+372 5550 0000</a></span>
+            </div>
+            <div class="contact-item">
+              <strong data-lang="ru">Зона работы</strong>
+              <strong data-lang="et">Tööpiirkond</strong>
+              <span data-lang="ru">Таллин и вся Эстония</span>
+              <span data-lang="et">Tallinn ja kogu Eesti</span>
+            </div>
+            <div class="contact-item">
+              <strong data-lang="ru">Часы работы</strong>
+              <strong data-lang="et">Lahtiolekuajad</strong>
+              <span data-lang="ru">Ежедневно, 7 дней в неделю</span>
+              <span data-lang="et">Iga päev, 7 päeva nädalas</span>
+            </div>
+            <a class="btn btn-whatsapp" href="https://wa.me/37255500000" target="_blank" rel="noopener" data-lang="ru">Написать в WhatsApp</a>
+            <a class="btn btn-whatsapp" href="https://wa.me/37255500000" target="_blank" rel="noopener" data-lang="et">Kirjuta WhatsAppi</a>
+          </div>
+          <form action="https://formspree.io/f/xpwzgkqp" method="POST">
+            <label>
+              <span data-lang="ru">Имя</span>
+              <span data-lang="et">Nimi</span>
+              <input type="text" name="name" required>
+            </label>
+            <label>
+              <span data-lang="ru">Телефон</span>
+              <span data-lang="et">Telefon</span>
+              <input type="tel" name="phone" required>
+            </label>
+            <label>
+              <span data-lang="ru">Что нужно перевезти?</span>
+              <span data-lang="et">Mida on vaja vedada?</span>
+              <select name="service">
+                <option data-lang="ru">Квартирный переезд</option>
+                <option data-lang="et">Korteri kolimine</option>
+                <option data-lang="ru">Офисный переезд</option>
+                <option data-lang="et">Kontori kolimine</option>
+                <option data-lang="ru">Перевозка мебели</option>
+                <option data-lang="et">Mööbli vedu</option>
+                <option data-lang="ru">Пианино / сейф / тяжёлое</option>
+                <option data-lang="et">Klaver / seif / raske</option>
+                <option data-lang="ru">Вывоз мусора</option>
+                <option data-lang="et">Prügi äravedu</option>
+                <option data-lang="ru">Другое</option>
+                <option data-lang="et">Muu</option>
+              </select>
+            </label>
+            <label>
+              <span data-lang="ru">Комментарий (адреса, дата, объём)</span>
+              <span data-lang="et">Kommentaar (aadressid, kuupäev, maht)</span>
+              <textarea name="message"></textarea>
+            </label>
+            <button class="btn btn-primary" type="submit" data-lang="ru">Получить расчёт</button>
+            <button class="btn btn-primary" type="submit" data-lang="et">Küsi hinnapakkumist</button>
+          </form>
+        </div>
+      </div>
+    </section>
+
+    <!-- CTA -->
+    <section>
+      <div class="container">
+        <div class="cta-banner">
+          <h2 data-lang="ru">Нужен переезд или перевозка? Звоните!</h2>
+          <h2 data-lang="et">Vaja kolida või vedada? Helistage!</h2>
+          <p data-lang="ru">Подача машины от 30 минут · Цены от 20€/час · Без скрытых доплат</p>
+          <p data-lang="et">Auto kohale 30 minutiga · Hinnad alates 20€/tund · Ilma varjatud tasudeta</p>
+          <div class="btn-row" style="justify-content:center">
+            <a class="btn btn-secondary" href="tel:+37255500000">📞 +372 5550 0000</a>
+            <a class="btn btn-whatsapp" href="https://wa.me/37255500000" target="_blank" rel="noopener">WhatsApp</a>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container">
+      <p data-lang="ru">© Грузоперевозки по Таллину и Эстонии · Работаем 7 дней в неделю</p>
+      <p data-lang="et">© Kolimis- ja veoteenus Tallinnas ja Eestis · Avatud 7 päeva nädalas</p>
+    </div>
+  </footer>
+
+  <div class="float-call">
+    <a class="fc-wa" href="https://wa.me/37255500000" target="_blank" rel="noopener" aria-label="WhatsApp">💬</a>
+    <a class="fc-phone" href="tel:+37255500000" aria-label="Позвонить">📞</a>
+  </div>
+
+  <script src="../../assets/lang.js"></script>
+</body>
+</html>
